@@ -5,7 +5,7 @@ CREATE DATABASE SpotifyClone;
 CREATE TABLE SpotifyClone.plano (
   id_plano INT PRIMARY KEY AUTO_INCREMENT,
   nome_plano VARCHAR(50) NOT NULL,
-  valor DECIMAL(10,2) NOT NULL,
+  valor DECIMAL(10,2) UNSIGNED ZEROFILL NOT NULL,
   UNIQUE(nome_plano)
 ) ENGINE = InnoDB;
 
@@ -28,7 +28,7 @@ CREATE TABLE SpotifyClone.musica (
   id_musica INT PRIMARY KEY AUTO_INCREMENT,
   id_album INT NOT NULL,
   nome_musica VARCHAR(100) NOT NULL,
-  duracao TIME NOT NULL,
+  duracao INT NOT NULL,
   FOREIGN KEY (id_album) REFERENCES SpotifyClone.album(id_album),
   UNIQUE(id_album, nome_musica)
 ) ENGINE = InnoDB;
@@ -52,59 +52,58 @@ CREATE TABLE SpotifyClone.segue (
 CREATE TABLE SpotifyClone.historico (
   id_usuario INT NOT NULL,
   id_musica INT NOT NULL,
-  data_reproducao DATE NOT NULL,
+  data_reproducao DATETIME NOT NULL,
   FOREIGN KEY (id_usuario) REFERENCES SpotifyClone.usuario(id_usuario),
   FOREIGN KEY (id_musica) REFERENCES SpotifyClone.musica(id_musica),
   UNIQUE(id_usuario, id_musica, data_reproducao)
 ) ENGINE = InnoDB;
 
 INSERT INTO SpotifyClone.plano (nome_plano, valor) VALUES
-('Grátis', 0.00),
-('Premium', 19.90),
-('Família', 29.90),
-('Duo', 24.90);
-
+('gratuito', 0),
+('pessoal', 6.99),
+('universitário', 5.99),
+('familiar', 7.99);
 INSERT INTO SpotifyClone.pessoa_artist (nome_pessoa_artist) VALUES
-('Adele'),
-('Ed Sheeran'),
-('Taylor Swift'),
-('Maroon 5'),
-('Coldplay'),
-('Michael Jackson');
+('Beyoncé'),
+('Queen'),
+('Elis Regina'),
+('Baco Exu do Blues'),
+('Blind Guardian'),
+('Nina Simone');
 
 INSERT INTO SpotifyClone.album (id_pessoa_artist, nome_album, ano_lancamento) VALUES
-(1, '21', '2011'),
-(1, '25', '2015'),
-(2, '+', '2011'),
-(2, 'x', '2014'),
-(3, 'Red', '2012'),
-(3, '1989', '2014'),
-(4, 'Parachutes', '2000'),
-(4, 'A Rush of Blood to the Head', '2002');
+(1, 'Renaissance', '2022'),
+(2, 'Jazz', '1978'),
+(2, 'Hot Space', '1982'),
+(3, 'Falso Brilhante', '1998'),
+(3, 'Vento de Maio', '2001'),
+(4, 'QVVJFA?', '2003'),
+(5, 'Somewhere Far Beyond', '2007'),
+(6, 'I Put A Spell On You', '2012');
 
 INSERT INTO SpotifyClone.musica (id_album, nome_musica, duracao) VALUES
-(1, 'Rolling in the Deep', '00:03:48'),
-(2, 'When We Were Young', '00:04:50'),
-(3, 'The A Team', '00:04:21'),
-(3, 'Lego House', '00:03:04'),
-(4, 'Sing', '00:03:55'),
-(4, 'Photograph', '00:04:19'),
-(5, 'I Knew You Were Trouble', '00:03:39'),
-(6, 'Yellow', '00:04:32'),
-(7, 'Yellow', '00:04:30'),
-(8, 'Clocks', '00:05:08');
+(1, 'BREAK MY SOUL', 279),
+(1, 'VIRGO''s GROOVE', 369),
+(1, 'ALIEN SUPERSTAR', 116),
+(2, 'Don''t Stop Me Now', 203),
+(3, 'Under Pressure', 152),
+(4, 'Como Nossos Pais', 105),
+(5, 'O Medo de Amar é o Medo de Ser Livre', 207),
+(6, 'Samba em Paris', 267),
+(7, 'The Bard''s Song', 244),
+(8, 'Feeling Good', 100);
 
 INSERT INTO SpotifyClone.usuario (nome_usuario, id_plano) VALUES
-('joao123', 2),
-('maria456', 1),
-('test22', 1),
-('ant123', 3),
-('ouser0943', 4),
-('mordeka22', 1),
-('edfan', 1),
-('lovemusic1', 2),
-('lovemusic', 1),
-('carlos789', 3);
+('Barbara Liskov', 1),
+('Robert Cecil Martin', 1),
+('Ada Lovelace', 4),
+('Martin Fowler', 4),
+('Sandi Metz', 4),
+('Paulo Freire', 3),
+('Bell Hooks', 3),
+('Christopher Alexander', 2),
+('Judith Butler', 2),
+('Jorge Amado', 2);
 
 INSERT INTO SpotifyClone.segue (id_usuario, id_pessoa_artist) VALUES
 (1, 1),
@@ -123,19 +122,19 @@ INSERT INTO SpotifyClone.segue (id_usuario, id_pessoa_artist) VALUES
 (3, 6);
 
 INSERT INTO SpotifyClone.historico (id_usuario, id_musica, data_reproducao) VALUES
-(1, 1, '2022-03-30'),
-(1, 2, '2022-03-30'),
-(1, 3, '2022-03-31'),
-(1, 4, '2022-04-01'),
-(1, 5, '2022-04-01'),
-(1, 6, '2022-04-01'),
-(2, 1, '2022-03-30'),
-(2, 2, '2022-04-02'),
-(2, 3, '2022-04-02'),
-(2, 4, '2022-04-02'),
-(2, 5, '2022-04-02'),
-(2, 6, '2022-04-02'),
-(3, 1, '2022-04-03'),
-(3, 2, '2022-04-04'),
-(3, 3, '2022-04-04'),
-(3, 4, '2022-04-04');
+(1, 8, '2022-02-28 10:45:55'),
+(1, 2, '2020-05-02 05:30:35'),
+(1, 10, '2020-03-06 11:22:33'),
+(2, 10, '2022-08-05 08:05:17'),
+(2, 7, '2020-01-02 07:40:33'),
+(3, 10, '2020-11-13 16:55:13'),
+(3, 2, '2020-12-05 18:38:30'),
+(4, 8, '2021-08-15 17:10:10'),
+(5, 8, '2022-01-09 01:44:33'),
+(5, 5, '2020-08-06 15:23:43'),
+(6, 7, '2017-01-24 00:31:17'),
+(6, 1, '2017-10-12 12:35:20'),
+(7, 4, '2011-12-15 22:30:49'),
+(8, 4, '2012-03-17 14:56:41'),
+(9, 9, '2022-02-24 21:14:22'),
+(10, 3, '2015-12-13 08:30:22');

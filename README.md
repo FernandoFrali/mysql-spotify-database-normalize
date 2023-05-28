@@ -489,3 +489,7 @@ O que será verificado:
 </details>
 
 ---
+
+## Desafios 10 e 11 (opcionais / bônus)
+
+Desafios 10 e 11 são a respeito de normalização de uma nova tabela (favsongs) e não contarão para a avaliação do projeto. Caso mesmo assim opte por fazê-los, consulte a página do projeto!

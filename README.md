@@ -1,4 +1,4 @@
-#  SPOTIFY SQL DATABASE NORMALIZE - [CONCLUÍDO :white_check_mark:]
+#  SPOTIFY SQL DATABASE NORMALIZE - CONCLUÍDO :white_check_mark:
 ***Este é um projeto/desafio avançado de SQL que fiz com o intuito de aprimorar minhas skills com comandos SQL ao normalizar tabelas do banco de dados do Spotify.***
 
 Neste projeto, normalizei um banco de dados separando por tabelas e colunas interligadas com Primary e Foreign Keys, isso no intuito de tornar o banco de dados mais escalável. Além de fazer diversas queries avançadas a cada desafio no intuito de buscar e filtrar essas informações de forma organizada.
